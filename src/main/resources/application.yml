@@ -1,0 +1,28 @@
+server:
+  port: 8480
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka/ 
+      
+spring:
+  application:
+    name: service-zuul
+    
+zuul:
+# 路由路径配置
+  routes:
+    api-ribbon: 
+    #    以/api-ribbon/ 开头的请求都转发给service-ribbon服务
+      path: /api-ribbon/**
+      service-id: service-ribbon
+    api-feign:
+    #    以/api-feign/ 开头的请求都转发给service-feign服务
+      path: /api-feign/**
+      service-id: service-feign
+      
+ribbon:  
+  ReadTimeout: 60000  
+  ConnectTimeout: 60000  
+      
